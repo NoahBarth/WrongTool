@@ -11,6 +11,19 @@ public class PlayerController : MonoBehaviour
         GetComponent<Renderer>().material = gameData.playerMaterials[playerID];
     }
 
+    void Start()
+    {
+        // TODO uncomment before Building project
+        // if (Display.displays.Length < 2)
+        // {
+        //     Debug.LogError("Mindestens zwei Displays erforderlich.");
+        //     return;
+        // }
+        // Display.displays[playerID].Activate();
+        // GetComponent<Camera>().targetDisplay = playerID+1;
+        GetComponent<Camera>().targetDisplay = playerID;
+    }
+
     void Update()
     {
         // TODO uncomment when ready
