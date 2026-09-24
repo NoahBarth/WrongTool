@@ -21,7 +21,7 @@ public class Dad : MonoBehaviour
 
         foreach (GameObject player in players)
         {
-            // send out message to each player
+            player.GetComponent<PlayerController>().ReceiveMessage(message);
         }
     }
 
@@ -35,11 +35,11 @@ public class Dad : MonoBehaviour
                 Tool tool = player.carriedTool.GetComponent<Tool>();
                 if (chosenToolID == tool.toolID)
                 {
-                    // player wins
+                    player.GetComponent<PlayerController>().ReceiveMessage("You Win :)");
                 }
                 else
                 {
-                    // angry message
+                    player.GetComponent<PlayerController>().ReceiveMessage("You fool! Wrong Tool!");
                     player.Stun();
                 }
             }
