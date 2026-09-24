@@ -16,3 +16,4 @@ MonoBehaviour:
   playerMaterials:
   - {fileID: 2100000, guid: 6790c475cf0f8f14db40e7944a920434, type: 2}
   - {fileID: 2100000, guid: aca606664e23afc459a0d7fbaa965ed5, type: 2}
+  stunSeconds: 3

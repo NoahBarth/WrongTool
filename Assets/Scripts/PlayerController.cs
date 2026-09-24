@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -5,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public int playerID = 0;
     [SerializeField] private GameData gameData;
     public GameObject carriedTool = null;
+    private bool stunned = false;
 
     void Awake()
     {
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Drop()
+    public void Drop()
     {
         if (carriedTool != null)
         {
@@ -55,5 +57,17 @@ public class PlayerController : MonoBehaviour
             carriedTool.GetComponent<Tool>().isCarried = false;
             carriedTool = null;
         }
+    }
+
+    public void Stun()
+    {
+        stunned = true;
+
+    }
+
+    private IEnumerator StunCountdown()
+    {
+        yield return new WaitForSeconds(gameData.stunSeconds);
+        stunned = false;
     }
 }

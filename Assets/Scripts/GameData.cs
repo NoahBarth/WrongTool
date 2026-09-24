@@ -7,4 +7,5 @@ public class GameData : ScriptableObject
     [Header("PlayerData")]
     public float playerSpeed;
     public List<Material> playerMaterials = new List<Material>();
+    public float stunSeconds;
 }
