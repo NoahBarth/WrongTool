@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnPickUp(InputValue value)
     {
-        if (carriedTool == null)
+        if (carriedTool == null && !stunned)
 	    {
 	    	PickUp();
 	    }
