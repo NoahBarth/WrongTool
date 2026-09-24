@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public void Stun()
     {
         stunned = true;
-
+        StartCoroutine(StunCountdown());
     }
 
     private IEnumerator StunCountdown()
