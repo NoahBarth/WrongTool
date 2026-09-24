@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
@@ -7,7 +9,9 @@ public class PlayerController : MonoBehaviour
 {
     public int playerID = 0;
     [SerializeField] private GameData gameData;
+    public Dictionary<int, GameObject> toolsInProximity = new Dictionary<int, GameObject>();
     public GameObject carriedTool = null;
+    public TextMeshPro messageBox;
     private bool stunned = false;
 
     private CharacterController controller;
@@ -54,14 +58,29 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // TODO uncomment when ready
-        //float horizontalInput = 1; // TODO input system
-        //float verticalInput = 1; // TODO input system
-        //
-        //Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
-        //transform.Translate(gameData.playerSpeed * Time.deltaTime * direction);
-        Move();
-        Look();
+        if (!stunned)
+        {
+            // TODO uncomment when ready
+            //float horizontalInput = 1; // TODO input system
+            //float verticalInput = 1; // TODO input system
+            //
+            //Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
+            //transform.Translate(gameData.playerSpeed * Time.deltaTime * direction);
+            Move();
+            Look();
+
+            if (false) //check if pickup-or-drop-button pressed instead of false
+	        {
+	        	if (carriedTool == null)
+	        	{
+	        		PickUp();
+	        	}
+	        	else
+	        	{
+	        		Drop();
+	        	}
+	        }
+        }
     }
 
     public void OnMove(InputValue value)
@@ -108,32 +127,44 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void PickUp()
     {
-        if (collision.gameObject.GetComponent<Tool>() != null && carriedTool == null)
-        {
-            if (!collision.gameObject.GetComponent<Tool>().isCarried)
+        if (toolsInProximity.Count > 0)
+	    {
+	    	GameObject chosenTool = null;
+            foreach (KeyValuePair<int, GameObject> tool in toolsInProximity)
             {
-                carriedTool = collision.gameObject;
-                carriedTool.transform.parent = gameObject.transform;
-                carriedTool.GetComponent<Tool>().isCarried = true;
+                if (chosenTool == null)
+                {
+                    chosenTool = tool.Value;
+                }
+                else
+                {
+                    if (Vector3.Distance(transform.position, chosenTool.transform.position) >
+                        Vector3.Distance(transform.position, tool.Value.transform.position))
+                    {
+                        chosenTool = tool.Value;
+                    }
+                }
             }
-        }
+
+            carriedTool = chosenTool;
+            carriedTool.transform.parent = gameObject.transform;
+            carriedTool.GetComponent<Tool>().isCarried = true;
+	    }
     }
 
     public void Drop()
     {
-        if (carriedTool != null)
-        {
-            carriedTool.transform.parent = null;
-            carriedTool.GetComponent<Tool>().isCarried = false;
-            carriedTool = null;
-        }
+        carriedTool.transform.parent = null;
+        carriedTool.GetComponent<Tool>().isCarried = false;
+        carriedTool = null;
     }
 
     public void Stun()
     {
         stunned = true;
+        Drop();
         StartCoroutine(StunCountdown());
     }
 
@@ -141,5 +172,17 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(gameData.stunSeconds);
         stunned = false;
+    }
+
+    public void ReceiveMessage(string message)
+    {
+    	messageBox.text = message;
+    	StartCoroutine(MessageCooldown());
+    }
+
+    private IEnumerator MessageCooldown()
+    {
+    	yield return new WaitForSeconds(gameData.messageTimerInSeconds);
+    	messageBox.text = "";
     }
 }

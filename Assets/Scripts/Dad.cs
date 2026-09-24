@@ -47,7 +47,6 @@ public class Dad : MonoBehaviour
                 {
                     // angry message
                     player.Stun();
-                    player.Drop();
                 }
             }
         }
