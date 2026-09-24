@@ -66,18 +66,6 @@ public class PlayerController : MonoBehaviour
         {
             Move();
             Look();
-
-            if (false) //check if pickup-or-drop-button pressed instead of false
-	        {
-	        	if (carriedTool == null)
-	        	{
-	        		PickUp();
-	        	}
-	        	else
-	        	{
-	        		Drop();
-	        	}
-	        }
         }
     }
 
@@ -93,7 +81,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnPickUp(InputValue value)
     {
-        Debug.Log("Button pressed: "+value);
+        if (carriedTool == null)
+	    {
+	    	PickUp();
+	    }
+	    else
+	    {
+	    	Drop();
+	    }
     }
 
     private void Move()

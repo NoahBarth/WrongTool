@@ -11,7 +11,7 @@ public class Tool : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
-            // add itself to players close items dictionary with id as key and its script instance as value
+            player.toolsInProximity[toolID] = gameObject;
         }
     }
 
@@ -20,7 +20,7 @@ public class Tool : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
-            // remove itself from players close items dictionary via id
+            player.toolsInProximity.Remove(toolID);
         }
     }
 }
