@@ -358,7 +358,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6713819655604375249, guid: 303497c37a3c0f54f8b76088dcd12b36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 303497c37a3c0f54f8b76088dcd12b36, type: 3}
 --- !u!1 &1606351764 stripped
 GameObject:
@@ -533,7 +536,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6713819655604375249, guid: 303497c37a3c0f54f8b76088dcd12b36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 303497c37a3c0f54f8b76088dcd12b36, type: 3}
 --- !u!1001 &1903271339
 PrefabInstance:
@@ -650,7 +656,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tool
   toolID: 0
   isCarried: 0
-  vagueDescription: Stopwatch
+  vagueDescription: I'm not sure how long this thing will take. Bring me the thing
+    that helps me keep an eye on that.
 --- !u!1 &1915573022 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5919413045533226802, guid: 303497c37a3c0f54f8b76088dcd12b36, type: 3}

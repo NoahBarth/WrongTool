@@ -316,15 +316,15 @@ RectTransform:
   m_GameObject: {fileID: 6713819655604375249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.95}
-  m_LocalScale: {x: 0.11865191, y: 0.11865191, z: 0.11865191}
+  m_LocalScale: {x: 0.06831265, y: 0.06831265, z: 0.06831265}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5742103339764753121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.01, y: -0.64}
-  m_SizeDelta: {x: 20, y: 5}
+  m_AnchoredPosition: {x: -0.028731, y: 0.19}
+  m_SizeDelta: {x: 40, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2186690993416145347
 MeshRenderer:
@@ -370,8 +370,8 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -822067423
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
