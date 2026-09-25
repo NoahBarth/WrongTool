@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,9 @@ public class Dad : MonoBehaviour
 {
     [SerializeField] private List<GameObject> tools = new List<GameObject>();
     [SerializeField] private List<GameObject> players = new List<GameObject>();
+    [SerializeField] private GameData gameData;
     private int chosenToolID;
+    private string message;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,7 +20,7 @@ public class Dad : MonoBehaviour
 
         System.Random random = new System.Random();
         chosenToolID = random.Next(tools.Count);
-        string message = tools[chosenToolID].GetComponent<Tool>().vagueDescription;
+        message = tools[chosenToolID].GetComponent<Tool>().vagueDescription;
 
         foreach (GameObject player in players)
         {
@@ -35,14 +38,21 @@ public class Dad : MonoBehaviour
                 Tool tool = player.carriedTool.GetComponent<Tool>();
                 if (chosenToolID == tool.toolID)
                 {
-                    player.GetComponent<PlayerController>().ReceiveMessage("You Win :)");
+                    player.ReceiveMessage("You Win :)");
                 }
                 else
                 {
-                    player.GetComponent<PlayerController>().ReceiveMessage("You fool! Wrong Tool!");
+                    player.ReceiveMessage("You fool! Wrong Tool!");
+                    StartCoroutine(ToolMessage(player));
                     player.Stun();
                 }
             }
         }
+    }
+
+    private IEnumerator ToolMessage(PlayerController player)
+    {
+    	yield return new WaitForSeconds(gameData.messageTimerInSeconds + 1);
+    	player.ReceiveMessage(message);
     }
 }
