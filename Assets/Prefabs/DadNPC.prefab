@@ -130,3 +130,4 @@ MonoBehaviour:
   players:
   - {fileID: 0}
   - {fileID: 0}
+  gameData: {fileID: 11400000, guid: b1847dd20af2b264aa2870ed45fc835f, type: 2}
