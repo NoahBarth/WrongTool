@@ -781,7 +781,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tool
   toolID: 0
   isCarried: 0
-  vagueDescription: 
+  vagueDescription: Do we still have the thing? You know the twisty thingy. The thing
+    that goes vrrrrr.
 --- !u!1001 &349164214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -895,7 +896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8bd1c345370704fa9effe639bdd5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tool
-  toolID: 0
+  toolID: 99
   isCarried: 0
   vagueDescription: 
 --- !u!1 &410087039
@@ -1140,7 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8bd1c345370704fa9effe639bdd5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tool
-  toolID: 0
+  toolID: 99
   isCarried: 0
   vagueDescription: 
 --- !u!1 &469034433 stripped
@@ -1805,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8bd1c345370704fa9effe639bdd5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tool
-  toolID: 0
+  toolID: 99
   isCarried: 0
   vagueDescription: 
 --- !u!1 &1041337537 stripped
@@ -2079,7 +2080,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tool
   toolID: 0
   isCarried: 0
-  vagueDescription: 
+  vagueDescription: Bring me the thing for the big thing with spinning wheels, for
+    the dirty thing you look through, so I can see through them again.
 --- !u!1 &1188530487 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3913062308695721076, guid: fe8ce6d3e0595436fbca331357ec81ea, type: 3}
@@ -2837,7 +2839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8bd1c345370704fa9effe639bdd5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tool
-  toolID: 0
+  toolID: 99
   isCarried: 0
   vagueDescription: 
 --- !u!1 &1707106012 stripped
@@ -3664,7 +3666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7931603218110726951, guid: b22ced564908df7499be8b26de4de33c, type: 3}
       propertyPath: tools.Array.size
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7931603218110726951, guid: b22ced564908df7499be8b26de4de33c, type: 3}
       propertyPath: 'tools.Array.data[0]'
@@ -3677,11 +3679,11 @@ PrefabInstance:
     - target: {fileID: 7931603218110726951, guid: b22ced564908df7499be8b26de4de33c, type: 3}
       propertyPath: 'tools.Array.data[2]'
       value: 
-      objectReference: {fileID: 349164215}
+      objectReference: {fileID: 1141412004}
     - target: {fileID: 7931603218110726951, guid: b22ced564908df7499be8b26de4de33c, type: 3}
       propertyPath: 'tools.Array.data[3]'
       value: 
-      objectReference: {fileID: 1697621610}
+      objectReference: {fileID: 1141412004}
     - target: {fileID: 7931603218110726951, guid: b22ced564908df7499be8b26de4de33c, type: 3}
       propertyPath: 'tools.Array.data[4]'
       value: 
