@@ -20,7 +20,7 @@ public class Dad : MonoBehaviour
 
         System.Random random = new System.Random();
         chosenToolID = random.Next(tools.Count);
-        message = tools[chosenToolID].GetComponent<Tool>().vagueDescription;
+        message = "Dad: " + tools[chosenToolID].GetComponent<Tool>().vagueDescription;
 
         foreach (GameObject player in players)
         {
@@ -38,11 +38,11 @@ public class Dad : MonoBehaviour
                 Tool tool = player.carriedTool.GetComponent<Tool>();
                 if (chosenToolID == tool.toolID)
                 {
-                    player.ReceiveMessage("You Win :)");
+                    player.ReceiveMessage("Dad: You're my favourite child!");
                 }
                 else
                 {
-                    player.ReceiveMessage("You fool! Wrong Tool!");
+                    player.ReceiveMessage("Dad: Wrong Tool! I've never loved you!");
                     StartCoroutine(ToolMessage(player));
                     player.Stun();
                 }

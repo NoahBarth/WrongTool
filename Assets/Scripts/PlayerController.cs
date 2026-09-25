@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
 
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeedWithItem = 2.5f;
     [SerializeField] private float lookSensitivity = 100f;
     private float verticalVelocity;
     [SerializeField] private float gravity = -9.81f;
@@ -151,8 +152,10 @@ public class PlayerController : MonoBehaviour
 
         movement.y = verticalVelocity;
 
+        float effectiveMoveSpeed = carriedTool == null ? moveSpeed : moveSpeedWithItem;
+
         controller.Move(
-            movement * moveSpeed * Time.deltaTime
+              movement * effectiveMoveSpeed * Time.deltaTime
         );
     }
 
