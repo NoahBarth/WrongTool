@@ -54,14 +54,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // TODO uncomment before Building project
-        // if (Display.displays.Length < 2)
-        // {
-        //     Debug.LogError("Mindestens zwei Displays erforderlich.");
-        //     return;
-        // }
-        // Display.displays[playerID].Activate();
-        // GetComponent<Camera>().targetDisplay = playerID+1;
-        playerCamera.targetDisplay = playerID;
+        if (Display.displays.Length < 2)
+        {
+            Debug.LogError("Mindestens zwei Displays erforderlich.");
+            return;
+        }
+        Display.displays[playerID].Activate();
+        GetComponent<Camera>().targetDisplay = playerID;
+        // playerCamera.targetDisplay = playerID;
         playerInput.user.UnpairDevices();
 
         //  if (Gamepad.all.Count > playerID)
