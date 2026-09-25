@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameData gameData;
     public Dictionary<int, GameObject> toolsInProximity = new Dictionary<int, GameObject>();
     public GameObject carriedTool = null;
-    public TextMeshPro messageBox;
+    public GameObject messageBox;
     private bool stunned = false;
 
     private CharacterController controller;
@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerCamera = GetComponent<Camera>();
         playerInput = GetComponent<PlayerInput>();
+
+        string messageBoxLayerName = "player" + playerID + "Only";
+        int messageBoxLayer = LayerMask.NameToLayer(messageBoxLayerName);
+        messageBox.layer = messageBoxLayer;
+        GetComponent<Camera>().cullingMask |= LayerMask.GetMask(messageBoxLayerName);
     }
 
     void Start()
@@ -239,13 +244,13 @@ public class PlayerController : MonoBehaviour
 
     public void ReceiveMessage(string message)
     {
-        messageBox.text = message;
+        messageBox.GetComponent<TextMeshPro>().text = message;
         StartCoroutine(MessageCooldown());
     }
 
     private IEnumerator MessageCooldown()
     {
         yield return new WaitForSeconds(gameData.messageTimerInSeconds);
-        messageBox.text = "";
+        messageBox.GetComponent<TextMeshPro>().text = "";
     }
 }
