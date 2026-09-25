@@ -21,16 +21,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float lookSensitivity = 100f;
     private float verticalVelocity;
-[SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float gravity = -9.81f;
+    public GameObject otherPlayer;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
     private float cameraPitch;
     private float cameraYaw;
 
+    private bool punchable;
+    private Renderer playerRenderer;
+    private Color originalColor;
+
     void Awake()
     {
-        GetComponent<Renderer>().material = gameData.playerMaterials[playerID];
+        // GetComponent<Renderer>().material = gameData.playerMaterials[playerID];
+        playerRenderer = GetComponent<Renderer>();
+        playerRenderer.material = gameData.playerMaterials[playerID];
+        originalColor = playerRenderer.material.color;
         controller = GetComponent<CharacterController>();
         playerCamera = GetComponent<Camera>();
         playerInput = GetComponent<PlayerInput>();
@@ -51,13 +59,14 @@ public class PlayerController : MonoBehaviour
 
         //  if (Gamepad.all.Count > playerID)
         //  {
-            // playerInput.actions.devices = new InputDevice[] { Gamepad.all[playerID] };
+        // playerInput.actions.devices = new InputDevice[] { Gamepad.all[playerID] };
         //  }
         //  else
         //  {
         //      Debug.LogError($"No gamepad found for Player {playerID}");
         //  }
-            playerInput.actions.devices = new InputDevice[] { Gamepad.all[0] };
+        playerInput.actions.devices = new InputDevice[] { Gamepad.all[playerID] };
+        punchable = false;
     }
 
     void Update()
@@ -82,14 +91,39 @@ public class PlayerController : MonoBehaviour
     public void OnPickUp(InputValue value)
     {
         if (carriedTool == null && !stunned)
-	    {
-	    	PickUp();
-	    }
-	    else
-	    {
-	    	Drop();
-	    }
+        {
+            PickUp();
+        }
+        else
+        {
+            Drop();
+        }
     }
+
+    public void OnAttack()
+    {
+        if(punchable)
+        {
+            otherPlayer.GetComponent<PlayerController>().Stun();
+            Debug.Log("Executed attack");
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<PlayerController>() != null && other.gameObject != gameObject)
+        {
+            punchable = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+
+        punchable = false;
+
+    }
+
 
     private void Move()
     {
@@ -141,8 +175,8 @@ public class PlayerController : MonoBehaviour
     void PickUp()
     {
         if (toolsInProximity.Count > 0)
-	    {
-	    	GameObject chosenTool = null;
+        {
+            GameObject chosenTool = null;
             foreach (KeyValuePair<int, GameObject> tool in toolsInProximity)
             {
                 if (chosenTool == null)
@@ -162,38 +196,53 @@ public class PlayerController : MonoBehaviour
             carriedTool = chosenTool;
             carriedTool.transform.parent = gameObject.transform;
             carriedTool.GetComponent<Tool>().isCarried = true;
-	    }
+        }
     }
 
     public void Drop()
     {
-        carriedTool.transform.parent = null;
-        carriedTool.GetComponent<Tool>().isCarried = false;
-        carriedTool = null;
+        if (carriedTool != null)
+        {
+            carriedTool.transform.parent = null;
+            carriedTool.GetComponent<Tool>().isCarried = false;
+            carriedTool = null;
+        }
     }
 
     public void Stun()
     {
         stunned = true;
+        Debug.Log("Inside stun");
         Drop();
         StartCoroutine(StunCountdown());
     }
 
     private IEnumerator StunCountdown()
     {
-        yield return new WaitForSeconds(gameData.stunSeconds);
+        // yield return new WaitForSeconds(gameData.stunSeconds);
+        // stunned = false;
+        float elapsed = 0f;
+        while (elapsed < gameData.stunSeconds)
+        {
+            playerRenderer.material.color = Color.white;
+            yield return new WaitForSeconds(0.3f);
+            playerRenderer.material.color = originalColor;
+            yield return new WaitForSeconds(0.3f);
+            elapsed += 0.6f;
+        }
+        playerRenderer.material.color = originalColor;
         stunned = false;
     }
 
     public void ReceiveMessage(string message)
     {
-    	messageBox.text = message;
-    	StartCoroutine(MessageCooldown());
+        messageBox.text = message;
+        StartCoroutine(MessageCooldown());
     }
 
     private IEnumerator MessageCooldown()
     {
-    	yield return new WaitForSeconds(gameData.messageTimerInSeconds);
-    	messageBox.text = "";
+        yield return new WaitForSeconds(gameData.messageTimerInSeconds);
+        messageBox.text = "";
     }
 }
