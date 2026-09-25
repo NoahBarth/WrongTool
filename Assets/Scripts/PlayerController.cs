@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private float cameraYaw;
 
     private bool punchable;
+    private bool punchReady = true;
     private Renderer playerRenderer;
     private Color originalColor;
 
@@ -108,11 +109,19 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack()
     {
-        if(punchable)
+        if(punchable && punchReady)
         {
             otherPlayer.GetComponent<PlayerController>().Stun();
+            StartCoroutine(PunchCooldown());
             Debug.Log("Executed attack");
         }
+    }
+
+    private IEnumerator PunchCooldown()
+    {
+        punchReady = false;
+        yield return new WaitForSeconds(7f);
+        punchReady = true;
     }
 
     void OnTriggerEnter(Collider other)
